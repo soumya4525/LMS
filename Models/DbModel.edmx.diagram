@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dce8dfc681b34481a57a6648268c1a17" Name="Diagram1">
+        <EntityTypeShape EntityType="ELMSModel.Item" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELMSModel.Service" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELMSModel.UserRegistration" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELMSModel.CustomerRequest" Width="1.5" PointX="3.375" PointY="3.75" />
+        <AssociationConnector Association="ELMSModel.FK__CustomerR__ItemI__38996AB5" />
+        <AssociationConnector Association="ELMSModel.FK__CustomerR__Servi__37A5467C" />
+        <EntityTypeShape EntityType="ELMSModel.Transaction" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ELMSModel.PickupBoy" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="ELMSModel.Assignment" Width="1.5" PointX="7.625" PointY="4.875" />
+        <AssociationConnector Association="ELMSModel.FK__Assignment__Pid__5CD6CB2B" />
+        <AssociationConnector Association="ELMSModel.FK__CustomerR__UserI__5DCAEF64" />
+        <AssociationConnector Association="ELMSModel.FK__Transacti__ItemI__6EF57B66" />
+        <AssociationConnector Association="ELMSModel.FK__Transacti__Servi__6FE99F9F" />
+        <AssociationConnector Association="ELMSModel.FK__Transacti__UserI__6E01572D" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

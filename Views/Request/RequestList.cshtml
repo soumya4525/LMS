@@ -1,0 +1,84 @@
+﻿@model IEnumerable<LMS.Models.CustomerRequest>
+
+@{
+    ViewBag.Title = "RequestList";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("tbody").on("click","#exp", function () {
+                    $("tbody #row").show();
+            });
+            $("tbody").on("click","#min", function () {
+                $("tbody #row").hide();
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <table class="table" id="tblData">
+        <tr>
+            <th>
+                RequestName
+            </th>
+            <th>
+                
+            </th>
+            <th>
+               
+            </th>
+            <th>
+                
+            </th>
+            <th>
+                
+            </th>
+            <th></th>
+            
+        </tr>
+        @foreach (var item in Model.GroupBy(x => x.RequestId))
+        {
+            <tbody>
+                @foreach (var i in @Model.Where(x => x.RequestId == item.Key.Value).GroupBy(x => x.UserRegistration.UserName))
+                {
+                    <tr>
+                        <td colspan="5">
+                            @i.Key
+                        </td>
+                        <td>
+                            @Html.ActionLink("View Details", "Details", new { RequestId = (item.Key.Value) })
+                        </td>
+                        
+                    </tr>
+                }
+
+                @foreach (var p in @Model.Where(x => x.RequestId == item.Key.Value))
+                {
+                <tr id="row" style="display:none">
+                    <td></td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.RequestDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.Item.ItemName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.Service.ServiceName)
+                    </td>
+                </tr>
+                    }
+                
+                </tbody>
+            }
+            </table>
+</body>
+</html>

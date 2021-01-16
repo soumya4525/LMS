@@ -1,0 +1,45 @@
+﻿@model IEnumerable<LMS.Models.Assignment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AssignDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssignTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PickupBoy.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PickupBoy.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AssignId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AssignId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AssignId })
+        </td>
+    </tr>
+}
+
+</table>

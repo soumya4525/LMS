@@ -1,0 +1,42 @@
+﻿@model LMS.Models.Assignment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Assignment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AssignDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssignDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssignTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssignTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PickupBoy.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PickupBoy.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AssignId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

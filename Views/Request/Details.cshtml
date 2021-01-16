@@ -1,0 +1,105 @@
+﻿@model IEnumerable<LMS.Models.CustomerRequest>
+
+@{
+    ViewBag.Title = "Details";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#exp").on("click", function () {
+                $("#row").show();
+            });
+            $("#min").on("click", function () {
+                $("#row").hide();
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+    <table class="table">
+        <tr>
+            <th>
+                RequestName
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service.ServiceName)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.GroupBy(x => x.RequestId))
+        {
+            <tbody>
+                @foreach (var i in @Model.Where(x => x.RequestId == item.Key.Value).GroupBy(x => x.UserRegistration.UserName))
+                {
+                <tr>
+                    <td colspan="5">
+                        @i.Key
+                    </td>
+                    <td>
+                        <input type="submit" value="+" class="btn-info" id="exp" />
+                    </td>
+                    <td>
+                        <input type="submit" value="-" class="btn-info" id="min" />
+                    </td>
+                </tr>
+                }
+                @foreach (var p in @Model.Where(x => x.RequestId == item.Key.Value))
+                {
+                    <tr>
+                        <td>
+                        <td>
+                            @Html.DisplayFor(modelItem => p.RequestDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => p.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => p.Item.ItemName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => p.Service.ServiceName)
+                        </td>
+
+                    </tr>
+                }
+                </tbody>
+            <tr>
+                <td>
+                    <a href="@Url.Action("Total", new { RequestId = (item.Key.Value) })"><input type="submit" value="Accept" /></a>
+
+                    <input type="button" value="Reject" name="submit" />
+                        <div id="division" style="display: none">
+                            <input type="text" id="txtReason" name="txtReason" />
+                            @using (Html.BeginForm("SendMail", "Request" , new { RequestId = (item.Key.Value) }))
+                            {
+                                @Html.AntiForgeryToken()
+                            <input type="submit" value="Send" />
+                            }
+</div>
+                </td>
+            </tr>
+                }
+
+        </table>
+</body>
+</html>
+
+

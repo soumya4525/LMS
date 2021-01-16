@@ -1,0 +1,93 @@
+﻿@model IEnumerable<LMS.Models.Transaction>
+
+@{
+    ViewBag.Title = "Bill";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+
+    <h2>Bill</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserRegistration.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service.ServiceName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServicePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.GroupBy(x => x.RequestId))
+        {
+            <tbody>
+                @foreach (var i in @Model.Where(x => x.RequestId == item.Key.Value).GroupBy(x => x.UserRegistration.UserName))
+                {
+                    <tr>
+                        <td colspan="7" style="background-color:lightgrey">
+                            @i.Key
+                        </td>
+                    </tr>
+                }
+                @foreach (var p in @Model.Where(x => x.RequestId == item.Key.Value))
+                { 
+                    <tr>
+                        <td>
+                           
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => p.Item.ItemName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => p.ItemPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => p.Service.ServiceName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => p.ServicePrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => p.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => p.Amount)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+                }
+                <tr style="background-color:lightgray">
+                    <td colspan="5"></td>
+                    <td style="color: limegreen; text-align:end">
+                        <strong>Total:</strong>
+                    </td>
+                    <td style="color: limegreen">
+                        <strong>@Model.Sum(b => b.Amount)</strong>
+                    </td>
+                </tr>
+        </table>
+    <a href="#"><input type="submit" class="btn-success" value="Pay Now" /></a>
+</body>
+</html>
